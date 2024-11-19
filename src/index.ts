@@ -1,34 +1,28 @@
 import {
-  Entity,
-  engine,
-  NftFrameType,
-  NftShape,
-  Transform,
-  MeshRenderer,
+  ColliderLayer,
   GltfContainer,
   InputAction,
   Material,
   MeshCollider,
-  Schemas,
-  pointerEventsSystem,
+  MeshRenderer,
+  PointerEventType,
   TextureWrapMode,
-  Billboard,
-  ColliderLayer,
-  RaycastHit,
+  Transform,
+  engine,
   inputSystem,
-  PointerEventType
+  pointerEventsSystem
 } from '@dcl/sdk/ecs'
-import { SplatSurface } from './splat-attack/splat-surface.ui'
-import { setupUi } from './ui'
-import { Quaternion, Vector3, Color4 } from '@dcl/sdk/math'
-import { openExternalUrl } from '~system/RestrictedActions'
+import { Quaternion, Vector3 } from '@dcl/sdk/math'
 import * as npc from 'dcl-npc-toolkit'
+import { openExternalUrl } from '~system/RestrictedActions'
+import { createFullNFT } from './Resources/nftUI'
 import { testscript } from './dialogs'
 import { createDogeNpc } from './dogeNpc'
-import { MakeNFTFrame, createFullNFT, displayNFTUI } from './Resources/nftUI'
+import { SplatSurface } from './splat-attack/splat-surface.ui'
+import { setupUi } from './ui'
 
-export function main() {
-  //place splat surface (this lets the player paint the surface)
+export function main(): void  {
+  // place splat surface (this lets the player paint the surface)
   SplatSurface.Move({ x: 2, y: 0, z: 0.8 })
   SplatSurface.Scale({ x: 1, y: 1, z: 1 })
 
@@ -66,7 +60,7 @@ createFullNFT('0x6fad7711dda6bb2f6901508e81dcf0ca20ee16c7', '1', 9.9, 1, 10.5, 3
 createFullNFT('0x61dfb0887d61ccc38acbab7fbfe26dbd82976b79', '1', 9.9, 2.8, 10.5, 3, 3, 3, 0, 90, 0)
 
 // Dough Table NPC
-let tableDialogue = npc.create(
+const tableDialogue = npc.create(
   {
     position: Vector3.create(2, 0, 0.8),
     rotation: Quaternion.fromEulerDegrees(0, 0, 0),
@@ -77,7 +71,7 @@ let tableDialogue = npc.create(
     model: {
       src: 'models/table03-nocollider.glb'
     },
-    //faceUser: true,
+    // faceUser: true,
     portrait: { path: 'images/benji04.png' },
     reactDistance: 1,
     onActivate: () => {
@@ -93,7 +87,7 @@ let tableDialogue = npc.create(
 // walking NPC
 createDogeNpc()
 
-//floor
+// floor
 const flooring = engine.addEntity()
 Transform.create(flooring, {
   position: Vector3.create(8, 0, 8),
@@ -107,7 +101,7 @@ Material.setBasicMaterial(flooring, {
   })
 })
 
-//doorway
+// doorway
 const doorway = engine.addEntity()
 
 GltfContainer.create(doorway, {
@@ -119,7 +113,7 @@ Transform.create(doorway, {
   rotation: Quaternion.fromEulerDegrees(0, 90, 0)
 })
 
-//roof
+// roof
 const roof1 = engine.addEntity()
 Transform.create(roof1, {
   position: Vector3.create(9, 7, 12),
@@ -136,7 +130,7 @@ Transform.create(roof2, {
 })
 MeshRenderer.setPlane(roof2)
 
-//create brochure rack
+// create brochure rack
 const brochureRack = engine.addEntity()
 const brochure01 = engine.addEntity()
 const brochure02 = engine.addEntity()
@@ -212,7 +206,7 @@ Transform.create(brochure21, {
 MeshRenderer.setPlane(brochure21)
 MeshCollider.setPlane(brochure21)
 
-//create comic rack
+// create comic rack
 const comicRack = engine.addEntity()
 const rareDoge01 = engine.addEntity()
 const rareDoge02 = engine.addEntity()
@@ -408,9 +402,9 @@ Transform.create(rareDoge35, {
 MeshRenderer.setPlane(rareDoge35)
 MeshCollider.setPlane(rareDoge35)
 
-//end comic rack
+// end comic rack
 
-//create cookie display
+// create cookie display
 const cookeiDisplay = engine.addEntity()
 GltfContainer.create(cookeiDisplay, {
   src: 'models/displaycase23.glb',
@@ -439,7 +433,7 @@ pointerEventsSystem.onPointerDown(
     }
   },
   function () {
-    openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/poodle' })
+    void openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/poodle' })
   }
 )
 
@@ -457,7 +451,7 @@ pointerEventsSystem.onPointerDown(
     }
   },
   function () {
-    openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/corgi' })
+    void openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/corgi' })
   }
 )
 
@@ -475,7 +469,7 @@ pointerEventsSystem.onPointerDown(
     }
   },
   function () {
-    openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/rottweiler' })
+    void openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/rottweiler' })
   }
 )
 
@@ -493,7 +487,7 @@ pointerEventsSystem.onPointerDown(
     }
   },
   function () {
-    openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/basenji' })
+    void openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/basenji' })
   }
 )
 
@@ -511,7 +505,7 @@ pointerEventsSystem.onPointerDown(
     }
   },
   function () {
-    openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/shih-tzu' })
+    void openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/shih-tzu' })
   }
 )
 
@@ -528,7 +522,7 @@ pointerEventsSystem.onPointerDown(
     }
   },
   function () {
-    openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/germanshepherd' })
+    void openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/germanshepherd' })
   }
 )
 
@@ -545,7 +539,7 @@ pointerEventsSystem.onPointerDown(
     }
   },
   function () {
-    openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/lab' })
+    void openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/lab' })
   }
 )
 const cookie8 = engine.addEntity()
@@ -561,7 +555,7 @@ pointerEventsSystem.onPointerDown(
     }
   },
   function () {
-    openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/maltese' })
+    void openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/maltese' })
   }
 )
 const cookie9 = engine.addEntity()
@@ -578,7 +572,7 @@ pointerEventsSystem.onPointerDown(
     }
   },
   function () {
-    openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/pitbull' })
+    void openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/pitbull' })
   }
 )
 
@@ -595,7 +589,7 @@ pointerEventsSystem.onPointerDown(
     }
   },
   function () {
-    openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/pomeranian' })
+    void openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/pomeranian' })
   }
 )
 
@@ -612,18 +606,18 @@ pointerEventsSystem.onPointerDown(
     }
   },
   function () {
-    openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/dogecoin' })
+    void openExternalUrl({ url: 'https://www.pupbusiness.com/product-page/dogecoin' })
   }
 )
 
 engine.addSystem(() => {
   const cmd = inputSystem.getInputCommand(InputAction.IA_POINTER, PointerEventType.PET_DOWN, cookeiDisplay)
-  if (cmd) {
+  if (cmd != null) {
     console.log('CLICK', cmd.hit?.meshName === 'COR')
   }
 })
 
-//tip jar
+// tip jar
 const tipJar = engine.addEntity()
 GltfContainer.create(tipJar, {
   src: 'models/tip-jar02.glb'
@@ -644,11 +638,11 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked Tip Jar')
-    openExternalUrl({ url: 'https://mydoge.com/jumpnspid3r' })
+    void openExternalUrl({ url: 'https://mydoge.com/jumpnspid3r' })
   }
 )
 
-//create meta doge
+// create meta doge
 const metaDoge = engine.addEntity()
 GltfContainer.create(metaDoge, {
   src: 'models/MetaDoge225.glb'
@@ -657,10 +651,10 @@ Transform.create(metaDoge, {
   position: Vector3.create(1, 0, 3.9),
   scale: Vector3.create(1.4, 1.4, 1.4)
 })
-//Billboard.create(metaDoge, {})
+// Billboard.create(metaDoge, {})
 
 // begin rare doge click info
-//raredoge01 begin
+// raredoge01 begin
 Material.setBasicMaterial(rareDoge01, {
   texture: Material.Texture.Common({
     src: 'https://dogeparty.tokenscan.io/img/cards/JOWLS.jpg'
@@ -676,7 +670,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/JOWLS' })
+    void openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/JOWLS' })
   }
 )
 // raredoge01 end
@@ -696,10 +690,10 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://rarerejectdirectory.com/card/DOGECENTRLND' })
+    void openExternalUrl({ url: 'https://rarerejectdirectory.com/card/DOGECENTRLND' })
   }
 )
-//raredoge11 end
+// raredoge11 end
 // raredoge21 begin
 Material.setBasicMaterial(rareDoge21, {
   texture: Material.Texture.Common({
@@ -717,7 +711,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://raredogedirectory.com/card/DOGECOOKIES' })
+    void openExternalUrl({ url: 'https://raredogedirectory.com/card/DOGECOOKIES' })
   }
 )
 
@@ -737,7 +731,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://raredogedirectory.com/card/VOXELCOL' })
+    void openExternalUrl({ url: 'https://raredogedirectory.com/card/VOXELCOL' })
   }
 )
 
@@ -756,7 +750,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/DOGETELLER' })
+    void openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/DOGETELLER' })
   }
 )
 
@@ -775,7 +769,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/DOGEBUSKERS' })
+    void openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/DOGEBUSKERS' })
   }
 )
 
@@ -795,7 +789,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/PARTYBUS' })
+    void openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/PARTYBUS' })
   }
 )
 
@@ -815,7 +809,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://raredogedirectory.com/card/A11509161988019925455' })
+    void openExternalUrl({ url: 'https://raredogedirectory.com/card/A11509161988019925455' })
   }
 )
 
@@ -834,7 +828,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://raredogedirectory.com/card/RARECOUPLE' })
+    void openExternalUrl({ url: 'https://raredogedirectory.com/card/RARECOUPLE' })
   }
 )
 
@@ -853,7 +847,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://raredogedirectory.com/card/VOXELCOSMOS' })
+    void openExternalUrl({ url: 'https://raredogedirectory.com/card/VOXELCOSMOS' })
   }
 )
 
@@ -873,7 +867,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://raredogedirectory.com/card/VOXELTREE' })
+    void openExternalUrl({ url: 'https://raredogedirectory.com/card/VOXELTREE' })
   }
 )
 
@@ -893,7 +887,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://raredogedirectory.com/card/DOGELOVERS' })
+    void openExternalUrl({ url: 'https://raredogedirectory.com/card/DOGELOVERS' })
   }
 )
 
@@ -912,7 +906,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/DPAWRDTROPHY.BestUseCase' })
+    void openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/DPAWRDTROPHY.BestUseCase' })
   }
 )
 
@@ -931,7 +925,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/THEMOONRULES' })
+    void openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/THEMOONRULES' })
   }
 )
 
@@ -951,7 +945,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/COOKIESHADES' })
+    void openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/COOKIESHADES' })
   }
 )
 
@@ -971,7 +965,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/DOGERDRIP' })
+    void openExternalUrl({ url: 'https://dogeparty.tokenscan.io/asset/DOGERDRIP' })
   }
 )
 
@@ -990,7 +984,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://raredogedirectory.com/card/SUMOPENPEN' })
+    void openExternalUrl({ url: 'https://raredogedirectory.com/card/SUMOPENPEN' })
   }
 )
 Material.setBasicMaterial(rareDoge15, {
@@ -1008,7 +1002,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://raredogedirectory.com/card/DOGERAMEN' })
+    void openExternalUrl({ url: 'https://raredogedirectory.com/card/DOGERAMEN' })
   }
 )
 
@@ -1028,7 +1022,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://raredogedirectory.com/card/DOGEOMIKOSHI' })
+    void openExternalUrl({ url: 'https://raredogedirectory.com/card/DOGEOMIKOSHI' })
   }
 )
 
@@ -1048,11 +1042,11 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://raredogedirectory.com/card/HANAYOMEDOGE' })
+    void openExternalUrl({ url: 'https://raredogedirectory.com/card/HANAYOMEDOGE' })
   }
 )
 
-//brochure01 begin
+// brochure01 begin
 Material.setBasicMaterial(brochure01, {
   texture: Material.Texture.Common({
     src: 'images/dp.png'
@@ -1068,7 +1062,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://dp.university/' })
+    void openExternalUrl({ url: 'https://dp.university/' })
   }
 )
 
@@ -1087,7 +1081,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://x.com/DogechainFamily' })
+    void openExternalUrl({ url: 'https://x.com/DogechainFamily' })
   }
 )
 
@@ -1106,7 +1100,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://shibeship.com/' })
+    void openExternalUrl({ url: 'https://shibeship.com/' })
   }
 )
 
@@ -1125,7 +1119,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://dogecoin.com/' })
+    void openExternalUrl({ url: 'https://dogecoin.com/' })
   }
 )
 
@@ -1144,7 +1138,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://x.com/MyDogeOfficial' })
+    void openExternalUrl({ url: 'https://x.com/MyDogeOfficial' })
   }
 )
 
@@ -1163,7 +1157,7 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({
+    void openExternalUrl({
       url: 'https://decentraland.org/marketplace/contracts/0x61dfb0887d61ccc38acbab7fbfe26dbd82976b79/items/0'
     })
   }
@@ -1184,11 +1178,11 @@ pointerEventsSystem.onPointerDown(
   },
   function () {
     console.log('clicked entity')
-    openExternalUrl({ url: 'https://shibeship.com/d-item/id-268' })
+    void openExternalUrl({ url: 'https://shibeship.com/d-item/id-268' })
   }
 )
 
-//start wall code
+// start wall code
 const wall01 = engine.addEntity()
 GltfContainer.create(wall01, {
   src: 'models/WALLS04.glb'
@@ -1259,7 +1253,7 @@ Transform.create(wall07, {
   rotation: Quaternion.fromEulerDegrees(0, 90, 0)
 })
 
-//there is no wall08 b/c in original, had it deleted
+// there is no wall08 b/c in original, had it deleted
 
 const wall09 = engine.addEntity()
 GltfContainer.create(wall09, {
