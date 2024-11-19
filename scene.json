@@ -1,0 +1,42 @@
+{
+  "ecs7": true,
+  "runtimeVersion": "7",
+  "display": {
+    "title": "Cookie Cutter Scene",
+    "description": "Test out our latest cookie cutters",
+    "navmapThumbnail": "images/thumbnail.png",
+    "favicon": "favicon_asset"
+  },
+  "owner": "",
+  "contact": {
+    "name": "SDK",
+    "email": ""
+  },
+  "main": "bin/index.js",
+  "tags": ["shop", "business"],
+  "scene": {
+    "parcels": ["-32,-53"],
+    "base": "-32,-53"
+  },
+  "spawnPoints": [
+    {
+      "name": "spawn1",
+      "default": true,
+      "position": {
+        "x": 15.5,
+        "y": 1,
+        "z": 2
+      },
+      "cameraTarget": {
+        "x": 16,
+        "y": 1,
+        "z": 16
+      }
+    }
+  ],
+  "featureToggles": {
+    "voiceChat": "enabled",
+    "portableExperiences": "enabled"
+  },
+  "name": "Cookie Cutter Shop"
+}
