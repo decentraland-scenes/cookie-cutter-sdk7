@@ -1,6 +1,6 @@
-import { Dialog } from 'dcl-npc-toolkit'
+import { type Dialog } from 'dcl-npc-toolkit'
 
-export let testscript: Dialog[] = [
+export const testscript: Dialog[] = [
   {
     text: `Hi there! Check out this cookie cutter of me.`,
     portrait: {
@@ -29,7 +29,7 @@ export let testscript: Dialog[] = [
   }
 ]
 
-export let dogeDialog = [
+export const dogeDialog = [
   {
     text: 'Me am muscle doge'
   },

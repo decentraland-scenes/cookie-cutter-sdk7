@@ -1,20 +1,20 @@
-import { Entity, TextShape, Transform, engine } from '@dcl/sdk/ecs'
-import { Color4, Vector3 } from '@dcl/sdk/math'
+import { type Entity } from '@dcl/sdk/ecs'
+import { Vector3 } from '@dcl/sdk/math'
 import { create, followPath, talk } from 'dcl-npc-toolkit'
-import { FollowPathData, NPCType } from 'dcl-npc-toolkit/dist/types'
+import { NPCType, type FollowPathData } from 'dcl-npc-toolkit/dist/types'
 import { dogeDialog } from './dialogs'
 
 let doge: Entity
 
-export function createDogeNpc() {
+export function createDogeNpc(): void {
   const offsetpath = 5
-  let dogePathPoints = [
+  const dogePathPoints = [
     Vector3.create(offsetpath, 0.24, offsetpath),
     Vector3.create(offsetpath, 0.24, 16 - offsetpath),
     Vector3.create(16 - offsetpath, 0.24, 16 - offsetpath),
     Vector3.create(16 - offsetpath, 0.24, offsetpath)
   ]
-  let dogePath: FollowPathData = {
+  const dogePath: FollowPathData = {
     path: dogePathPoints,
     totalDuration: dogePathPoints.length * 6,
     loop: true
